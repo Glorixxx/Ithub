@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<style>
+	.tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 3px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+.tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+body {
+    margin: 0;
+    font-family: sans-serif;
+    color: #dedede;
+    background-color: #180052;
+}
+
+header {
+    font-size: 0;
+    margin: 0 50px 50px 0;
+}
+
+h1, h3, p {
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    font-weight: 400;
+    margin: 0;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+    text-align: right;
+}
+
+p {
+    font-size: 1rem;
+    width: auto;
+}
+
+main {
+    height: 600px;
+    font-size: 0;
+    overflow-x: auto;
+}
+
+.wrapper {
+    height: calc(100vh - 100px);
+    padding: 50px 50px 0px 50px;
+}
+
+.header {
+    display: inline-flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: -25px;
+}
+
+.userTXT, .startTXT {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 30px;
+}
+
+.userIMG {
+    width: 100px;
+    height: 100px;
+}
+
+.column1, .column2, .column3, .column4 {
+    flex-direction: column;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.column4 {
+    margin-left: 50px;
+}
+
+.text {
+    margin-top: 105px;
+    margin-left: 15px;
+}
+
+.text-explorer {
+    margin-top: 105px;
+    margin-left: 5px;
+}
+
+.big {
+    width: 270px;
+    height: 130px;
+    margin-bottom: 10px;
+}
+
+.small {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 10px;
+}
+
+.small-inline {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.mail {
+    background: #008299;
+    background-image: url(https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2013/06/Windows-8-Mail.png);
+}
+
+.people {
+    background: #d24726;
+    background-image: url(images/People.ico);
+}
+
+.messaging {
+    background: #8c0496;
+    background-image: url(images/8-messaging.png);
+}
+
+.desktop {
+    background-image: url(https://www.fonstola.ru/pic/201412/1920x1200/fonstola.ru_156054.jpg);
+    background-size: cover;
+}
+
+.calendar {
+    background: #5133ab;
+    background-image: url(images/Calendar.ico);
+}
+
+.photos {
+    background: #008299;
+    background-image: url(images/photos.png);
+}
+
+.finance {
+    background: #008a00;
+    background-image: url(data:image/png;base64,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);
+}
+
+.weather {
+    background: #2672ec;
+    background-image: url(data:image/png;base64,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);
+}
+
+.explorer {
+    background: #2672ec;
+    background-image: url(https://download.logo.wine/logo/Internet_Explorer_10/Internet_Explorer_10-Logo.wine.png);
+}
+
+.store {
+    background-image: url(https://w7.pngwing.com/pngs/318/455/png-transparent-microsoft-store-windows-10-universal-windows-platform-apps-windows-logos-angle-text-rectangle.png);
+    background-size: cover;
+}
+
+.maps {
+    background-image: url(data:image/png;base64,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);
+    background-size: cover;
+}
+
+.skyDrive {
+    background-image: url(https://www.groovypost.com/wp-content/uploads/2013/12/Microsoft-SkyDrive.jpg);
+    background-size: cover;
+}
+
+.sports {
+    background: #5133ab;
+    background-image: url(images/Sports.ico);
+}
+
+.news {
+    background: #ac193d;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAk1BMVEWsGT3///+rEjmpADLQk520QFfSmaKnACrp0NSmACWlACCmACT58fLVoampADC3Sl+6Vmj8+PjYp6/DcX+gAACjABHetryqCjayJUmzO1OxMk20K06nACnMiZTGeYfcn63MeIzHb4L04OXnvMbVk6K/X3LszNPerLfx2uC/Zna9UWnmwsrGaH3br7b36+3TiJm6OlvkpJKrAAACeklEQVR4nO3bbVPaQBSGYaoQNISXKBikIL5UjdLS/v9f13EKdpeZM2XXHPcU7utzpsM97eQhm9JqAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQFCdNi110Y7qpt2w7CR1k6979qVph19YpW7yUUghhelRSOFRFua9N2a+vCkUFm/KZeqyLaewGJ9Hm/R3O00W9uL/mMHFbuGtla+naoV3B184snJL1Soshof+d3jfsVg4zqONd++lD7PUZVsKe3gkhd9Sh72jMNaNlbFwC8t2FuxKCCzuLBYWk0Go+YtQeP9osjB8D6tLofDJzOBrFa7MDL5W4fNU4bPG0SpU+KiRlAqzgcJnjaNTWC7MHNMoFa5vzYyFUmE9MnMr/eBJVC4sfv1qsrBBKztjQWGkq27qrr90Cvt25lCnsDA0hzqF6+925tBbi2lHMi3/XDK6Fi6Y/XALDT0d+oX5iSTfFF5XwgVd77y0/mpnDvf8TtPbFIpPff6JcG1oLAILZ13hOCP3ToTP5p9Y8C9hhRd9QebdsCzNYWDhfsqloTlUKSwMPTuFFj4OBR334LSwNIeBhfutxdrSWKisxf9cKK+FV/iBV63NCyvsS+8v2u5amJpDlXvps6WxUCn8aejZKbTwZSQYumthag5D1+JUWIu5e6f5ZelWqrIWpsbCf0Mq/gxmsl2LgXBBzy3MU0d53LfcC/F3MItNYSZe4KzF+jx1lEfhnGZl6dlJpdDUs5NKoa051Ch8NTWHKoWmxoJfI0QoD76wtvWPVKHwwVph3XTh0lhhS3rXEs3Mfw5+J76OiZS6BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACO3W8YXkR2WYcCtAAAAABJRU5ErkJggg==);
+}
+
+.bing {
+    background-image: url(https://i.pinimg.com/originals/7b/03/d9/7b03d9963ef88c94fe6c8e112a426f46.jpg);
+    background-size: cover;
+}
+
+.travel {
+    background: #039aaf;
+    background-image: url(https://www.digitalcitizen.life/wp-content/uploads/2020/10/travel.jpg);
+}
+
+.games {
+    background: #008b01;
+    background-image: url(https://i0.wp.com/mynintendonews.com/wp-content/uploads/2015/09/xbox.jpg?fit=800%2C500&ssl=1);
+}
+
+.music {
+    background-image: url(data:image/png;base64,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);
+    background-size: cover;
+}
+
+.camera {
+    background: #8c0496;
+    background-image: url(https://cdn.windowsreport.com/wp-content/uploads/2014/04/windows-8-camera-app-picture-location.jpg);
+}
+
+.video {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAllBMVEWsGT3///+rDzj46e304OW8VmqmACSnACvmyM358fKpADHtytPks7+oAC2oAC/jr7ywKUjEXXaqCzb9+frAXHH78PO6Q1/t0tivIkTWj6DPiZjz2+HOgZK6S2P67fGyKEvqwczhqbeiAA62N1bWnajivsTTk6DGan/JeIjCZnjjuMHJcYStIkK+VGu4S2C0O1W6QF+jABnIJT4VAAADG0lEQVR4nO3bYVPaMACA4SSVSQsMSKEtCoMORCai2///c8OdYkvlLnWQJt77fPTkcu8llDZthQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOehXml1pPKHCoOPnP4Xe4Wj/u2VfQ8ja4HTsWxEPI2s9KnZj2YCpQznVhaqnjQVKKWdSYwWzRX2e1YKO80Vdik8Z2EcWhXbL8x/frNIL+wX9r/bGOzNoEPhGVF4ERSeFYUX4U/hZ69j/ShUkZovk2SZRVHtSh8KI7Vb3bXTNG2379Yzpet92v1CLTbtIH47gY6D9r2uNY/OF0a79JD3GrlY1rmadbxQqQ+3Be5rrFS3C1WWfxQo5SQzXqlOF54MlPHKONHpQrGOTxTK8OYrFOrNYXe1us0a/DL8LjpcqJL3bZ1pt5L4sDSbRYcL9fo9Z5jdHE9jvDWbRHcLi1Moh1rNjjfqugOjQR0u3MhioVB6Xb4nELeMlqm7hdmqXChEb5eWEqd+F6rnznGh0Fm/OI1do0HdLXwKKoX7k7hNYRqvjAZ1t7Alq4Uvx588PHwRH00G9a1wfya3PUyu54Wjjwu16MdfpPDEKi0eTz0vfBpXC5WYFo4/geeFz2mlUM9XxYuNhdGgzhaKQX5cGLUeiitXTowGdbdQTcuFSm9uS4Fy5Pc5zf5Qc1ssVGIdlgM7z54XClFYpsPevLxC9wyv8h0u1KOr98JdcBzYSbwvFNH7Nk1+3CfDqf+7GELN7yphB3lmOKjLhULP0lOBC7PDjHC8UOjdiWeMujPjXW+3C4VOqptse6uB+ba+44VCDSaVvdJgI2rcfXK98OVkNC/91I8nWa07iO4XCtWbb9s/xmEYjsfB4l7UvL/qQeG+UV9nyXC7Hf4W1zXvAHtS+EIprT/1qII3hZ9G4VlReBEUnhWFF9FEYf7n2iLVwJPsQduqsf3CRlDof6GdN7t03lzhxMrbeWp08imuizN8vuh/Pa4aSoxzO2/J7n9+bzpBA9K12dNFZ6BE0mpAYqvvX2MjbBYCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL64vwv3Ut6LbRQEAAAAAElFTkSuQmCC);
+    background-size: cover;
+}
+
+.mail, .people, .messaging, .calendar, .photos, .finance, .weather, 
+.explorer, .sports, .news, .travel, .games, .camera {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+</style>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Windows 8 start screen</title>
+    <link rel="shortcut icon" type="image/png" href="https://cdn.icon-icons.com/icons2/836/PNG/512/Windows_Phone_icon-icons.com_66782.png">
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+            <div class="header">
+			    <h1 class="startTXT">Start</h1>
+			    <h3 class="userTXT">User</h3>
+                <img src="data:image/jpeg;base64,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" 
+                     alt="user" 
+                     class="userIMG">
+            </div>
+		</header>
+		<main>
+			<div class="column1">
+            	<div class="tile big mail">
+					<p class="text">Mail</p>
+            	</div>
+            	<div class="tile big people">
+					<p class="text">People</p>
+				</div>
+            	<div class="tile big messaging">
+					<p class="text">Messaging</p>
+            	</div>
+            	<div class="tile big desktop">
+					<p class="text">Desktop</p>
+            	</div>
+       		</div>
+
+			<div class="column2">
+            	<div class="tile big calendar">
+					<p class="text">Calendar</p>
+            	</div>
+            	<div class="tile big photos">
+					<p class="text">Photos</p>
+            	</div>
+            	<div class="tile big finance">
+					<p class="text">Finance</p>
+            	</div>
+            	<div class="tile big weather">
+					<p class="text">Weather</p>
+            	</div>
+            </div>
+
+			<div class="column3">
+            	<div class="small-inline">
+            		<div class="tile small explorer">
+						<p class="text-explorer">Internet Explorer</p>
+            		</div>
+            		<div class="tile small maps">
+						<p class="text">Maps</p>
+            		</div>
+            	</div>
+
+            	<div class="small-inline">
+            		<div class="tile small store">
+						<p class="text">Store</p>
+            		</div>
+            		<div class="tile small skyDrive">
+						<p class="text">SkyDrive</p>
+            		</div>
+            	</div>
+
+            	<div class="tile big sports">
+					<p class="text">Sports</p>
+            	</div>
+            	<div class="tile big news">
+					<p class="text">News</p>
+            	</div>
+       		</div>
+
+       		<div class="column4">
+            	<div class="tile big bing">
+					<p class="text">Bing</p>
+            	</div>
+            	<div class="tile big travel">
+					<p class="text">Travel</p>
+            	</div>
+            	<div class="small-inline">
+           			<div class="tile small games">
+						<p class="text">Games</p>
+           			</div>
+           			<div class="tile small music">
+						<p class="text">Music</p>
+           			</div>
+           		</div>
+            		<div class="small-inline">
+           			<div class="tile small camera">
+						<p class="text">Camera</p>
+           			</div>
+           			<div class="tile small video">
+						<p class="text">Video</p>
+           			</div>
+           		</div>
+     		</div>
+
+		</main>
+	</div>
+</body>
+</html>
